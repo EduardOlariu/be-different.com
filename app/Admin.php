@@ -2,12 +2,11 @@
 
 namespace App;
 
-use App\Notifications\UserResetPassword;
+use App\Notifications\AdminResetPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Role;
-class User extends Authenticatable
+
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -37,12 +36,6 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new UserResetPassword($token));
-    }
-
-
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
+        $this->notify(new AdminResetPassword($token));
     }
 }
