@@ -48,7 +48,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('user.auth.login');
+        $ana="ana are mere";
+        $data=array('students'=>'students', 'instructors'=>'instructors', 'instituitions'=>'$instituitions');
+
+        return view('user.auth.login',compact('ana'))->with('data');
     }
 
     /**

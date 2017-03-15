@@ -18,7 +18,7 @@ class RedirectIfAdmin
 	public function handle($request, Closure $next, $guard = 'admin')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('admin/home');
+	        return redirect('admin/home')->with('danger','You are logged in as admin');
 	    }
 
 	    return $next($request);

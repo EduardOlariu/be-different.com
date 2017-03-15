@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -80,6 +80,7 @@
                     @endif
                 </div>
             @endif
+            @include('layouts.partials.flash_message')
 
             <div class="content">
                 <div class="title m-b-md">
@@ -95,5 +96,7 @@
                 </div>
             </div>
         </div>
+
+        <script></script>
     </body>
 </html>

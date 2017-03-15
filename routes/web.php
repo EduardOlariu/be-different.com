@@ -12,13 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+        return view('welcome');
 });
 
+
+
 Route::group(['prefix' => 'user'], function () {
+
+
+  Route::get('/','User\PageController@index');
+
   Route::get('/login', 'UserAuth\LoginController@showLoginForm');
   Route::post('/login', 'UserAuth\LoginController@login');
   Route::post('/logout', 'UserAuth\LoginController@logout');
+  Route::get('/logout', 'UserAuth\LoginController@logout');
 
   Route::get('/register', 'UserAuth\RegisterController@showRegistrationForm');
   Route::post('/register', 'UserAuth\RegisterController@register');
@@ -27,6 +34,10 @@ Route::group(['prefix' => 'user'], function () {
   Route::post('/password/reset', 'UserAuth\ResetPasswordController@reset');
   Route::get('/password/reset', 'UserAuth\ForgotPasswordController@showLinkRequestForm');
   Route::get('/password/reset/{token}', 'UserAuth\ResetPasswordController@showResetForm');
+
+
+
+
 });
 
 Route::group(['prefix' => 'admin'], function () {

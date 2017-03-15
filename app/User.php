@@ -3,13 +3,14 @@
 namespace App;
 
 use App\Notifications\UserResetPassword;
+use App\Traits\HasRolesTraits;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRolesTraits;
 
     /**
      * The attributes that are mass assignable.
@@ -41,8 +42,6 @@ class User extends Authenticatable
     }
 
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
-    }
+
+
 }

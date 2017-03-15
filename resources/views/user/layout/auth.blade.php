@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
+    <title>{{ config('app.name', 'Be different') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -21,6 +21,8 @@
     </script>
 </head>
 <body>
+
+    @include('layouts.partials.flash_message')
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -35,7 +37,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/user') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: User
+                    {{ config('app.name', 'Be different') }}: User
                 </a>
             </div>
 
@@ -48,7 +50,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
+                    @if (Auth::guard('web'))
                         <li><a href="{{ url('/user/login') }}">Login</a></li>
                         <li><a href="{{ url('/user/register') }}">Register</a></li>
                     @else
@@ -79,7 +81,10 @@
 
     @yield('content')
 
+
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
 </body>
 </html>

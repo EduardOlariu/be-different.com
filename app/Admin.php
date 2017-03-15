@@ -3,12 +3,13 @@
 namespace App;
 
 use App\Notifications\AdminResetPassword;
+use App\Traits\HasRolesTraits;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRolesTraits;
 
     /**
      * The attributes that are mass assignable.
