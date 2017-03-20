@@ -21,6 +21,14 @@ Route::group(['prefix' => 'user'], function () {
 
 
   Route::get('/','User\PageController@index');
+  Route::get('/dashboard','User\PageController@index');
+  Route::group(['prefix' => 'profile'], function () {
+      Route::get('/','User\ProfileController@index');
+    });
+
+
+
+
 
   Route::get('/login', 'UserAuth\LoginController@showLoginForm');
   Route::post('/login', 'UserAuth\LoginController@login');

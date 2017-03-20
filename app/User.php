@@ -42,6 +42,12 @@ class User extends Authenticatable
     }
 
 
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
+
 
 
 }

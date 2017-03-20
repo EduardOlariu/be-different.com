@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     You are logged in as User!
-
+                    <i class="fa fa-envelope-square" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
