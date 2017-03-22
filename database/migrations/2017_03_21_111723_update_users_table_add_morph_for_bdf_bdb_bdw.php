@@ -14,7 +14,7 @@ class UpdateUsersTableAddMorphForBdfBdbBdw extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table){
-           $table->nullableMorphs('userable');
+           $table->nullableMorphs('type');
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateUsersTableAddMorphForBdfBdbBdw extends Migration
     public function down()
     {
         Schema::table('users', function(Blueprint $table){
-            $table->dropColumn(['userable_id','userable_type']);
+            $table->dropColumn(['type_id','type_type']);
         });
     }
 }

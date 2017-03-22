@@ -13,6 +13,8 @@ trait HasUserTraits
 
     public function user()
     {
-        return $this->morphMany('\App\User','userable');
+       // return $this->hasOne('App\User','userable_id','id')
+         //   ->where('userable->type','App\DifferentPerson');
+        return $this->morphOne('\App\User','type');
     }
 }

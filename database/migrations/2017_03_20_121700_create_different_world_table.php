@@ -12,7 +12,7 @@ class CreateDifferentWorldTable extends Migration
      */
     public function up()
     {
-        Schema::create('different-world', function (Blueprint $table) {
+        Schema::create('different_world', function (Blueprint $table) {
             $table->increments('id');
             
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateDifferentWorldTable extends Migration
      */
     public function down()
     {
-        Schema::drop('different-world');
+        Schema::drop('different_world');
     }
 }

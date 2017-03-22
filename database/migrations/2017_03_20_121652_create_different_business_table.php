@@ -12,13 +12,13 @@ class CreateDifferentBusinessTable extends Migration
      */
     public function up()
     {
-        Schema::create('different-business', function (Blueprint $table) {
+        Schema::create('different_business', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name');
 
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+//            $table->integer('user_id')->unsigned()->index();
+//            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();
@@ -32,6 +32,6 @@ class CreateDifferentBusinessTable extends Migration
      */
     public function down()
     {
-        Schema::drop('different-business');
+        Schema::drop('different_business');
     }
 }

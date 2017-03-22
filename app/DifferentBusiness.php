@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DifferentBusiness extends Model
 {
     use HasUserTraits;
+
+//    protected $table="different-business";
+
     //
 }

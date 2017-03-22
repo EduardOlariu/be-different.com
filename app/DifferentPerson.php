@@ -10,6 +10,7 @@ class DifferentPerson extends Model
     //
     use HasUserTraits;
 
+//    protected $table="different-person";
     protected $fillable = [
         'name'
     ];
