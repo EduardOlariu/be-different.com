@@ -6,7 +6,6 @@
  * Time: 12:00
  */
 $dp = Auth::guard('user')->user()->type;
-echo $dp;
 ?>
 
 @extends('user.layout.app')
@@ -36,6 +35,7 @@ echo $dp;
 
 
                             <button class="btn btn-success" type="submit">Save</button>
+                            @include('layouts.partials.errors')
 
                             {!! Form::close() !!}
                     </div>

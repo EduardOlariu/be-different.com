@@ -20,6 +20,6 @@ class PageController extends Controller
 
     public function index()
     {
-        return view('user.home')->with('success','blana, merge');
+        return view('user.home')->with('success','');
     }
 }

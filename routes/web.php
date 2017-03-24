@@ -22,14 +22,15 @@ Route::group(['prefix' => 'user'], function () {
 
   Route::get('/','User\PageController@index');
   Route::get('/dashboard','User\PageController@index');
+
   Route::group(['prefix' => 'profile'], function () {
-      Route::get('/','User\ProfileController@index');
       Route::get('/','User\ProfileController@index');
       Route::post('/person','User\ProfileController@create_person');
       Route::post('/business','User\ProfileController@create_business');
       Route::post('/world','User\ProfileController@create_world');
       Route::get('/edit','User\ProfileController@edit');
       Route::post('/edit','User\ProfileController@store_edit');
+
     });
 
 

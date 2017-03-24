@@ -25,7 +25,10 @@
 
     @include('user.layout.partials.menu')
     @include('layouts.partials.flash_message')
+
+
     @yield('content')
+
 
 
     <!-- Scripts -->
