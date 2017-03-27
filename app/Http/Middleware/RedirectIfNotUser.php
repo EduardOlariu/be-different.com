@@ -20,8 +20,6 @@ class RedirectIfNotUser
 	    if (!Auth::guard($guard)->check()) {
 	        return redirect('user/login')->with('danger','Please login first');
 	    }
-
-
 	    return $next($request);
 	}
 }

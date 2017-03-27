@@ -16,6 +16,7 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('user');
+        $this->middleware('user.profile')->except('choose_type','create_person');
     }
 
     public function index()
@@ -27,9 +28,9 @@ class ProfileController extends Controller
 //        return '0';
 
 //        Auth::guard('user')->user()->type;
-        if (!Auth::guard('user')->user()->type)
-            return view('user.profile.choose_type');
-//        return 0;
+//        if (!Auth::guard('user')->user()->type)
+//        return view('user.profile.choose_type');
+////        return 0;
 //        return Auth::guard('user')->user()->type->last_name;
 //        return Auth::guard('user')->user()->name;
 //        if (Auth::guard('user')->user()->userable_type == "")
@@ -40,6 +41,12 @@ class ProfileController extends Controller
         return view('user.profile.index');
     }
 
+
+    public function choose_type()
+    {
+
+        return view('user.profile.choose_type');
+    }
 
     public function create_person()
     {
@@ -58,6 +65,7 @@ class ProfileController extends Controller
         return view('user.profile.edit_person');
     }
 
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
@@ -75,12 +83,8 @@ class ProfileController extends Controller
 
         }
     }
-
-
     public function store_edit_person(Request $request)
     {
-
-
         $rules = array(
             'first_name' => 'required',
             'last_name' => 'required'
@@ -91,13 +95,10 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-
         $dp = Auth::guard('user')->user()->type;
-
         $dp->first_name = $request->input('first_name');
         $dp->last_name = $request->input('last_name');
         $dp->save();
-
         return Redirect::to('/user/profile/edit')
             ->with('success', 'Profile updated');
     }

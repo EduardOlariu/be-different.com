@@ -16,6 +16,7 @@ class PageController extends Controller
     public function __construct()
     {
       $this->middleware('user');
+      $this->middleware('user.profile');
     }
 
     public function index()

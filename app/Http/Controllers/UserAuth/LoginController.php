@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/user/home';
+    public $redirectTo = '/user/';
 
     /**
      * Create a new controller instance.
@@ -39,6 +39,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('user.guest', ['except' => 'logout']);
+//        $this->middleware('user.profile')->only('login');
     }
 
     /**
@@ -48,10 +49,10 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $ana="ana are mere";
-        $data=array('students'=>'students', 'instructors'=>'instructors', 'instituitions'=>'$instituitions');
+//        $ana="ana are mere";
+//        $data=array('students'=>'students', 'instructors'=>'instructors', 'instituitions'=>'$instituitions');
 
-        return view('user.auth.login',compact('ana'))->with('data');
+        return view('user.auth.login');
     }
 
     /**

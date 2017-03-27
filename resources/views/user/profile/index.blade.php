@@ -18,10 +18,10 @@
                     <div class="panel-body">
                         <ul>
                             <li>
-                                <a href="user/profile/edit">Edit profile</a>
+                                <a href="/user/profile/edit">Edit profile</a>
                             </li>
                             <li>
-                                <a href="user/profile/page/edit">Edit personal page</a>
+                                <a href="/user/profile/page/edit">Edit personal page</a>
                             </li>
                         </ul>
                     </div>

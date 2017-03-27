@@ -18,7 +18,7 @@ class RedirectIfUser
 	public function handle($request, Closure $next, $guard = 'user')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('user/')->with('danger','You are logged in as user');
+	        return redirect('/user/')->with('danger','You are logged in as user');
 	    }
 
 	    return $next($request);
