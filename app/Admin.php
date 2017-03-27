@@ -41,6 +41,11 @@ class Admin extends Authenticatable
     }
 
 
+    /**
+     *  Return the videos added by $this admin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function videos()
     {
         return $this->hasMany(MotivationalVideo::class);

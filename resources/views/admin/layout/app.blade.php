@@ -12,8 +12,8 @@
 
     <!-- Styles -->
 
-@include('layouts.partials.includes')
-<!-- Scripts -->
+    @include('layouts.partials.includes')
+    <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -23,18 +23,20 @@
 <body>
 
 
-@include('admin.layout.partials.menu')
-@include('layouts.partials.flash_message')
+    @include('admin.layout.partials.menu')
+    @include('layouts.partials.flash_message')
 
 
-@yield('content')
+    @yield('content')
 
 
 
-<!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="/js/app.js"></script>
-<script src="/js/custom.js"></script>
-@yield('scripts')
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/js/confirm/script.js"></script>
+    <script src="/js/confirm/jquery.confirm.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
+    @yield('scripts')
 </body>
 </html>

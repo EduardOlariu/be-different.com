@@ -19,7 +19,6 @@ class CreateMotivationalVideos extends Migration
             $table->text('description');
             $table->text('short_description');
             $table->string('link');
-
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class RedirectIfNotUser
 	        return redirect('user/login')->with('danger','Please login first');
 	    }
 
+
 	    return $next($request);
 	}
 }
