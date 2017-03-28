@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use App\DifferentBusiness;
 use App\DifferentPerson;
+use App\DifferentWorld;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +18,7 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('user');
-        $this->middleware('user.profile')->except('choose_type','create_person');
+        $this->middleware('user.profile')->except('choose_type','create_person','create_business', 'create_world');
     }
 
     public function index()
@@ -65,6 +67,26 @@ class ProfileController extends Controller
         return view('user.profile.edit_person');
     }
 
+    public function create_business()
+    {
+        $user = Auth::guard('user')->user();
+        $business = new DifferentBusiness();
+        $business->name = $user->name;
+        $business->save();
+        $business->user()->save($user);
+        return view('user.profile.edit_business');
+    }
+
+    public function create_world()
+    {
+        $user = Auth::guard('user')->user();
+        $business = new DifferentWorld();
+        $business->name = $user->name;
+        $business->save();
+        $business->user()->save($user);
+        return view('user.profile.edit_business');
+    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
@@ -75,9 +97,9 @@ class ProfileController extends Controller
             case 'App\\DifferentPerson':
                 return view('user.profile.edit_person');
             case 'App\\DifferentBusiness':
-                return "difB";
+                return view('user.profile.edit_business');
             case 'App\\DifferentWorld':
-                return "difW";
+                return view('user.profile.edit_world');
             default:
                 return "1";
 
@@ -103,6 +125,80 @@ class ProfileController extends Controller
             ->with('success', 'Profile updated');
     }
 
+    public function store_edit_business(Request $request)
+    {
+        $rules = array(
+            'name' => 'required',
+            'email' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'phone' => 'required',
+            'web' => 'required',
+            'how_different' => 'required'
+        );
+
+        $validator = Validator::make($request->input(), $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/user/profile/edit')
+                ->withErrors($validator)
+                ->withInput($request->input());
+        }
+        $business = Auth::guard('user')->user()->type;
+        $business->name = $request->input('name');
+        $business->email = $request->input('email');
+        $business->description = $request->input('description');
+        $business->address = $request->input('address');
+        $business->city = $request->input('city');
+        $business->state = $request->input('state');
+        $business->zip = $request->input('zip');
+        $business->phone = $request->input('phone');
+        $business->web = $request->input('web');
+        $business->how_different = $request->input('how_different');
+        $business->save();
+        return Redirect::to('/user/profile/edit')
+            ->with('success', 'Profile updated');
+    }
+
+    public function store_edit_world(Request $request)
+    {
+        $rules = array(
+            'name' => 'required',
+            'email' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'phone' => 'required',
+            'web' => 'required',
+            'how_different' => 'required'
+        );
+
+        $validator = Validator::make($request->input(), $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/user/profile/edit')
+                ->withErrors($validator)
+                ->withInput($request->input());
+        }
+        $business = Auth::guard('user')->user()->type;
+        $business->name = $request->input('name');
+        $business->email = $request->input('email');
+        $business->description = $request->input('description');
+        $business->address = $request->input('address');
+        $business->city = $request->input('city');
+        $business->state = $request->input('state');
+        $business->zip = $request->input('zip');
+        $business->phone = $request->input('phone');
+        $business->web = $request->input('web');
+        $business->how_different = $request->input('how_different');
+        $business->save();
+        return Redirect::to('/user/profile/edit')
+            ->with('success', 'Profile updated');
+    }
+
 
     public function store_edit(Request $request)
     {
@@ -114,9 +210,9 @@ class ProfileController extends Controller
 
 
             case 'App\\DifferentBusiness':
-                return "difB";
+                return $this->store_edit_business($request);
             case 'App\\DifferentWorld':
-                return "difW";
+                return $this->store_edit_world($request);
             default:
                 return "1";
         }

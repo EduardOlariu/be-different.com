@@ -9,7 +9,7 @@ class DifferentBusiness extends Model
 {
     use HasUserTraits;
 
-//    protected $table="different-business";
+    protected $table="different_business";
 
     //
 }

@@ -19,23 +19,23 @@ $dp = Auth::guard('user')->user()->type;
 
                     <div class="panel-body">
                     {!! Form::model($dp,['url'=>'/user/profile/edit','method'=>'POST']) !!}
-                        
-                        
-                        <!-- Business_Name Form Input -->
+
+
+                    <!-- Organization_Name Form Input -->
                         <div class="form-group">
-                            {!! Form::label('name','Business Name:') !!}
+                            {!! Form::label('name','Organization Name:') !!}
                             {!! Form::text('name',null,['class'=> 'form-control']) !!}
                         </div>
 
-                        <!-- Business_Email Form Input -->
+                        <!-- Organization_Email Form Input -->
                         <div class="form-group">
-                            {!! Form::label('email','Business Email:') !!}
+                            {!! Form::label('email','Organization Email:') !!}
                             {!! Form::text('email',null,['class'=> 'form-control']) !!}
                         </div>
 
                         <!-- Address Form Input -->
                         <div class="form-group">
-                            {!! Form::label('address','Address:') !!}
+                            {!! Form::label('address','address:') !!}
                             {!! Form::text('address',null,['class'=> 'form-control']) !!}
                         </div>
 
