@@ -3,8 +3,8 @@ Menu
  */
 .navbar-brand {
     padding: 10px 15px;
-}
 
+}
 
 
 
@@ -36,4 +36,9 @@ i {
 }
 .messages{
     margin-top:8%;
+}
+img.preview{
+    width: 140px;
+    height: 140px;
+    border:1px #A5A7A9;
 }

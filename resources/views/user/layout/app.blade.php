@@ -36,5 +36,6 @@
     <script src="/js/app.js"></script>
     <script src="/js/custom.js"></script>
     @yield('scripts')
+    @include('layouts.partials.js_includes')
 </body>
 </html>

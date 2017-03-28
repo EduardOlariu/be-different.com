@@ -43,11 +43,28 @@ Route::group(['prefix' => 'user'], function () {
 
         Route::get('/choose_type', 'User\ProfileController@choose_type');
 
+
+        Route::post('/test_image', 'User\ProfileController@upload_image');
+        Route::get('/test_image', 'User\ProfileController@test_image');
+
         Route::post('/person', 'User\ProfileController@create_person');
         Route::post('/business', 'User\ProfileController@create_business');
         Route::post('/world', 'User\ProfileController@create_world');
         Route::get('/edit', 'User\ProfileController@edit');
         Route::post('/edit', 'User\ProfileController@store_edit');
+
+
+
+
+
+        Route::group(['prefix' => 'page'], function () {
+//            Route::get('/', 'User\ProfileController@page_index');
+            Route::get('/edit','User\ProfileController@edit_page');
+            Route::patch('/edit','User\ProfileController@upload_profile_picture');
+            Route::post('/edit','User\ProfileController@store_edit_page');
+        });
+
+
 
     });
 

@@ -12,6 +12,6 @@ class DifferentPerson extends Model
 
 //    protected $table="different-person";
     protected $fillable = [
-        'name'
+        'first_name','last_name','birth_date','gender','country','city','about_you','how_different'
     ];
 }

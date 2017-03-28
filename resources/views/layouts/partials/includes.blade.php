@@ -8,6 +8,11 @@
 ?>
 <link href="/css/app.css" rel="stylesheet">
 <link href="/css/styles.css" rel="stylesheet">
+<link href="/includes/lity/lity.min.css" rel="stylesheet">
 <link href="/css/font-awesome/font-awesome-4.7.0 3/css/font-awesome.min.css" rel="stylesheet">
 
+
 <link rel="stylesheet" type="text/css" href="/css/confirm/jquery.confirm.css" />
+
+
+
