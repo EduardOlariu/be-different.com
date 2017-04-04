@@ -6,6 +6,7 @@ use App\DifferentBusiness;
 use App\DifferentPerson;
 use App\DifferentWorld;
 
+use function compact;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +94,22 @@ class ProfileController extends Controller
     }
 
 
+    public function reset()
+    {
+        $user=Auth::guard('user')->user();
+        if ($user->hasRole('Inactive')){
+                $different=$user->type();
+                $different->delete();
+                $user->type_type=null;
+                $user->type_id=null;
+                return \redirect('/user/profile/choose_type')
+                    ->with('danger','Profile was reset!');
+        }
+        return \redirect('/user/profile/edit')
+            ->with('error','You cannot reset your profile!');
+
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
@@ -140,7 +157,7 @@ class ProfileController extends Controller
         $dp->how_different = $request->input('how_different');
         $dp->save();
         $dp->save();
-        return Redirect::to('/user/profile/edit')
+        return Redirect::to('/user/profile/edit',compact('dp'))
             ->with('success', 'Profile updated');
     }
 
@@ -168,20 +185,21 @@ class ProfileController extends Controller
         $business = Auth::guard('user')->user()->type;
 
         $business->fill($request->input());
-        return $business;
-        $business->name = $request->input('name');
-        $business->email = $request->input('email');
-        $business->description = $request->input('description');
-        $business->address = $request->input('address');
-        $business->city = $request->input('city');
-        $business->state = $request->input('state');
-        $business->zip = $request->input('zip');
-        $business->phone = $request->input('phone');
-        $business->web = $request->input('web');
-        $business->how_different = $request->input('how_different');
-        $business->save();
-        return Redirect::to('/user/profile/edit')
+//        return $business;
+//        $business->name = $request->input('name');
+//        $business->email = $request->input('email');
+//        $business->description = $request->input('description');
+//        $business->address = $request->input('address');
+//        $business->city = $request->input('city');
+//        $business->state = $request->input('state');
+//        $business->zip = $request->input('zip');
+//        $business->phone = $request->input('phone');
+//        $business->web = $request->input('web');
+//        $business->how_different = $request->input('how_different');
+//        $business->save();
+        return Redirect::to('/user/profile/edit',compact('business'))
             ->with('success', 'Profile updated');
+
     }
 
     public function store_edit_world(Request $request)
@@ -205,19 +223,19 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $business = Auth::guard('user')->user()->type;
-        $business->name = $request->input('name');
-        $business->email = $request->input('email');
-        $business->description = $request->input('description');
-        $business->address = $request->input('address');
-        $business->city = $request->input('city');
-        $business->state = $request->input('state');
-        $business->zip = $request->input('zip');
-        $business->phone = $request->input('phone');
-        $business->web = $request->input('web');
-        $business->how_different = $request->input('how_different');
-        $business->save();
-        return Redirect::to('/user/profile/edit')
+        $world = Auth::guard('user')->user()->type;
+        $world->name = $request->input('name');
+        $world->email = $request->input('email');
+        $world->description = $request->input('description');
+        $world->address = $request->input('address');
+        $world->city = $request->input('city');
+        $world->state = $request->input('state');
+        $world->zip = $request->input('zip');
+        $world->phone = $request->input('phone');
+        $world->web = $request->input('web');
+        $world->how_different = $request->input('how_different');
+        $world->save();
+        return Redirect::to('/user/profile/edit',compact('world'))
             ->with('success', 'Profile updated');
     }
 

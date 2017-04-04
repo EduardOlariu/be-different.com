@@ -15,7 +15,12 @@ $dp = Auth::guard('user')->user()->type;
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Profile</div>
+                    <div class="panel-heading">
+                        Business Profile
+                        @if(Auth::guard('user')->user()->hasRole('Inactive'))
+                            <div style="float:right"><a href="/user/profile/reset">Reset Profile</a></div>
+                        @endif
+                    </div>
 
                     <div class="panel-body">
                     {!! Form::model($dp,['url'=>'/user/profile/edit','method'=>'POST']) !!}

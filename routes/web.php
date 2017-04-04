@@ -51,6 +51,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/business', 'User\ProfileController@create_business');
         Route::post('/world', 'User\ProfileController@create_world');
         Route::get('/edit', 'User\ProfileController@edit');
+        Route::get('/reset', 'User\ProfileController@reset');
         Route::post('/edit', 'User\ProfileController@store_edit');
 
 
