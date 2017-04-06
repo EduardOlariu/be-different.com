@@ -23,7 +23,7 @@ $dp = Auth::guard('user')->user()->type;
                     </div>
 
                     <div class="panel-body">
-                    {!! Form::model($dp,['url'=>'/user/profile/edit','method'=>'POST']) !!}
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
 
 
                     <!-- Organization_Name Form Input -->

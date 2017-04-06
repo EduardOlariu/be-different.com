@@ -5,7 +5,7 @@
  * Date: 22/03/2017
  * Time: 12:00
  */
-$dp = Auth::guard('user')->user()->type;
+//$dp = Auth::guard('user')->user()->type;
 ?>
 
 @extends('user.layout.app')
@@ -23,7 +23,7 @@ $dp = Auth::guard('user')->user()->type;
                     </div>
 
                     <div class="panel-body">
-                    {!! Form::model($dp,['url'=>'/user/profile/edit','method'=>'POST']) !!}
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
                         
                         
                         <!-- Business_Name Form Input -->

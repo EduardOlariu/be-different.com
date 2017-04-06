@@ -24,7 +24,7 @@
 
 
                     <div class="panel-body">
-                    {!! Form::model($dp,['url'=>'/user/profile/edit','method'=>'POST']) !!}
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
 
                     <!-- First_name Form Input -->
                         <div class="form-group">
@@ -89,4 +89,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var moment = require('moment');
+
+        moment().format();
+        alert(moment('2016-03-12 13:00:00').add(1, 'day').format('LLL'));
+    </script>
 @endsection

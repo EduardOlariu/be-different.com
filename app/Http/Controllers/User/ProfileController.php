@@ -52,7 +52,11 @@ class ProfileController extends Controller
 
     public function choose_type()
     {
-
+        if  (Auth::guard('user')->user()->type!=null)
+        {
+            return Redirect::to('/user/profile/edit')
+                ->with('danger','You already chose your profile type!');
+        }
         return view('user.profile.choose_type');
     }
 
@@ -65,32 +69,32 @@ class ProfileController extends Controller
         if (isset($name[1])) {
             $last_name = $name[1];
         }
-        $dp = new DifferentPerson();
-        $dp->first_name = $first_name;
-        $dp->last_name = $last_name;
-        $dp->save();
-        $dp->user()->save($user);
-        return view('user.profile.edit_person');
+        $different = new DifferentPerson();
+        $different->first_name = $first_name;
+        $different->last_name = $last_name;
+        $different->save();
+        $different->user()->save($user);
+        return view('user.profile.edit_person',compact('different'));
     }
 
     public function create_business()
     {
         $user = Auth::guard('user')->user();
-        $business = new DifferentBusiness();
-        $business->name = $user->name;
-        $business->save();
-        $business->user()->save($user);
-        return view('user.profile.edit_business');
+        $different = new DifferentBusiness();
+        $different->name = $user->name;
+        $different->save();
+        $different->user()->save($user);
+        return view('user.profile.edit_business',compact('different'));
     }
 
     public function create_world()
     {
         $user = Auth::guard('user')->user();
-        $business = new DifferentWorld();
-        $business->name = $user->name;
-        $business->save();
-        $business->user()->save($user);
-        return view('user.profile.edit_business');
+        $different = new DifferentWorld();
+        $different->name = $user->name;
+        $different->save();
+        $different->user()->save($user);
+        return view('user.profile.edit_business',compact('different'));
     }
 
 
@@ -115,15 +119,18 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        switch (Auth::guard('user')->user()->type_type) {
+        $user=Auth::guard('user')->user();
+        $different=$user->type;
+        switch ($user->type_type) {
             case 'App\\DifferentPerson':
-                return view('user.profile.edit_person');
+                return view('user.profile.edit_person',compact('different'));
             case 'App\\DifferentBusiness':
-                return view('user.profile.edit_business');
+                return view('user.profile.edit_business',compact('different'));
             case 'App\\DifferentWorld':
-                return view('user.profile.edit_world');
+                return view('user.profile.edit_world',compact('different'));
             default:
-                return "1";
+                return Redirect::back()
+                    ->with('danger','An error occured!');
 
         }
     }
@@ -140,24 +147,26 @@ class ProfileController extends Controller
             'about_you' => 'required',
             'how_different' => 'required'
         );
+
         $validator = Validator::make($request->input(), $rules);
         if ($validator->fails()) {
             return Redirect::to('/user/profile/edit')
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $dp = Auth::guard('user')->user()->type;
-        $dp->first_name = $request->input('first_name');
-        $dp->last_name = $request->input('last_name');
-        $dp->birth_date = $request->input('birth_date');
-        $dp->gender = $request->input('gender');
-        $dp->country = $request->input('country');
-        $dp->city = $request->input('city');
-        $dp->about_you = $request->input('about_you');
-        $dp->how_different = $request->input('how_different');
-        $dp->save();
-        $dp->save();
-        return Redirect::to('/user/profile/edit',compact('dp'))
+        $different = Auth::guard('user')->user()->type;
+        $different->first_name = $request->input('first_name');
+        $different->last_name = $request->input('last_name');
+        $different->birth_date = $request->input('birth_date');
+        $different->gender = $request->input('gender');
+        $different->country = $request->input('country');
+        $different->city = $request->input('city');
+        $different->about_you = $request->input('about_you');
+        $different->how_different = $request->input('how_different');
+
+        $different->save();
+
+        return view('user.profile.edit_person',compact('different'))
             ->with('success', 'Profile updated');
     }
 
@@ -182,22 +191,22 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $business = Auth::guard('user')->user()->type;
+        $different = Auth::guard('user')->user()->type;
 
-        $business->fill($request->input());
-//        return $business;
-//        $business->name = $request->input('name');
-//        $business->email = $request->input('email');
-//        $business->description = $request->input('description');
-//        $business->address = $request->input('address');
-//        $business->city = $request->input('city');
-//        $business->state = $request->input('state');
-//        $business->zip = $request->input('zip');
-//        $business->phone = $request->input('phone');
-//        $business->web = $request->input('web');
-//        $business->how_different = $request->input('how_different');
-//        $business->save();
-        return Redirect::to('/user/profile/edit',compact('business'))
+        $different->fill($request->input());
+//        return $different;
+//        $different->name = $request->input('name');
+//        $different->email = $request->input('email');
+//        $different->description = $request->input('description');
+//        $different->address = $request->input('address');
+//        $different->city = $request->input('city');
+//        $different->state = $request->input('state');
+//        $different->zip = $request->input('zip');
+//        $different->phone = $request->input('phone');
+//        $different->web = $request->input('web');
+//        $different->how_different = $request->input('how_different');
+//        $different->save();
+        return view('user.profile.edit_business',compact('different'))
             ->with('success', 'Profile updated');
 
     }
@@ -223,27 +232,25 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $world = Auth::guard('user')->user()->type;
-        $world->name = $request->input('name');
-        $world->email = $request->input('email');
-        $world->description = $request->input('description');
-        $world->address = $request->input('address');
-        $world->city = $request->input('city');
-        $world->state = $request->input('state');
-        $world->zip = $request->input('zip');
-        $world->phone = $request->input('phone');
-        $world->web = $request->input('web');
-        $world->how_different = $request->input('how_different');
-        $world->save();
-        return Redirect::to('/user/profile/edit',compact('world'))
+        $different = Auth::guard('user')->user()->type;
+        $different->name = $request->input('name');
+        $different->email = $request->input('email');
+        $different->description = $request->input('description');
+        $different->address = $request->input('address');
+        $different->city = $request->input('city');
+        $different->state = $request->input('state');
+        $different->zip = $request->input('zip');
+        $different->phone = $request->input('phone');
+        $different->web = $request->input('web');
+        $different->how_different = $request->input('how_different');
+        $different->save();
+        return view('user.profile.edit_world',compact('different'))
             ->with('success', 'Profile updated');
     }
 
 
     public function store_edit(Request $request)
     {
-
-
         switch (Auth::guard('user')->user()->type_type) {
             case 'App\\DifferentPerson':
                 return $this->store_edit_person($request);
@@ -256,8 +263,6 @@ class ProfileController extends Controller
             default:
                 return "1";
         }
-
-
     }
 
     /**
