@@ -32,13 +32,13 @@
 
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/custom.js"></script>
-    <script src="/node_modules/moment/moment.js"></script>
-    {{--<script src="/js/moment/moment-with-locales.js"></script>--}}
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
 
-    @yield('scripts')
+    {{--<script src="/js/custom.js"></script>--}}
+    {{--<script src="/node_modules/moment/moment.js"></script>--}}
+    {{--<script src="/js/moment/moment-with-locales.js"></script>--}}
     @include('layouts.partials.js_includes')
+    @yield('scripts')
+
 </body>
 </html>

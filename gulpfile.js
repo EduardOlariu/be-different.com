@@ -34,3 +34,26 @@
 // //     mix.less("app.less");
 // // });
 
+var elixir = require('laravel-elixir');
+elixir(function (mix) {
+    mix.styles([
+        'app.css',
+        'styles.css',
+        'lity.css',
+        // 'font-awesome/font-awesome-4.7.0/css/font-awesome.min.css',
+        'font-awesome/font-awesome-4.7.0/css/font-awesome.css',
+
+        'bootstrap-datepicker/bootstrap-datepicker.css',
+        'bootstrap-datepicker/bootstrap-datepicker.standalone.css',
+        'bootstrap-datepicker/bootstrap-datepicker3.css',
+        'bootstrap-datepicker/bootstrap-datepicker3.standalone.css',
+    ]);
+    mix.scripts([
+        'jquery_3.1.1.js',
+        'app.js',
+        'custom.js',
+        'lity.js',
+        'bootstrap-datepicker/bootstrap-datepicker.js'
+    ]);
+
+});

@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Be different') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -81,10 +81,11 @@
 
     @yield('content')
 
+    @include('layouts.partials.js_includes')
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/custom.js"></script>
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
+    {{--<script src="/js/app.js"></script>--}}
+    {{--<script src="/js/custom.js"></script>--}}
 </body>
 </html>
