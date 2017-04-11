@@ -264,7 +264,7 @@ img.preview{
   src: url('font-awesome/font-awesome-4.7.0 3/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('font-awesome/font-awesome-4.7.0 3/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('font-awesome/font-awesome-4.7.0 3/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('font-awesome/font-awesome-4.7.0 3/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('font-awesome/font-awesome-4.7.0 3/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
-  font-awesome/font-awesome-4.7.0 3
+  /*font-awesome/font-awesome-4.7.0 3*/
 }
 .fa {
   display: inline-block;

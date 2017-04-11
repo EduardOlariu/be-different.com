@@ -5,17 +5,20 @@ namespace App\Http\Controllers\User;
 use App\DifferentBusiness;
 use App\DifferentPerson;
 use App\DifferentWorld;
-
-use function compact;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\MySQLTraits;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use function compact;
 
 class ProfileController extends Controller
 {
+    use MySQLTraits;
+
+
 
     public function __construct()
     {
@@ -24,9 +27,9 @@ class ProfileController extends Controller
         $this->middleware('user.profile')->except('choose_type', 'create_person', 'create_business', 'create_world');
 
     }
-    
 
-        
+
+
     public function index()
     {
 //
@@ -52,10 +55,9 @@ class ProfileController extends Controller
 
     public function choose_type()
     {
-        if  (Auth::guard('user')->user()->type!=null)
-        {
+        if (Auth::guard('user')->user()->type != null) {
             return Redirect::to('/user/profile/edit')
-                ->with('danger','You already chose your profile type!');
+                ->with('danger', 'You already chose your profile type!');
         }
         return view('user.profile.choose_type');
     }
@@ -74,7 +76,7 @@ class ProfileController extends Controller
         $different->last_name = $last_name;
         $different->save();
         $different->user()->save($user);
-        return view('user.profile.edit_person',compact('different'));
+        return view('user.profile.edit_person', compact('different'));
     }
 
     public function create_business()
@@ -84,7 +86,7 @@ class ProfileController extends Controller
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
-        return view('user.profile.edit_business',compact('different'));
+        return view('user.profile.edit_business', compact('different'));
     }
 
     public function create_world()
@@ -94,23 +96,24 @@ class ProfileController extends Controller
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
-        return view('user.profile.edit_business',compact('different'));
+        return view('user.profile.edit_business', compact('different'));
     }
 
 
     public function reset()
     {
-        $user=Auth::guard('user')->user();
-        if ($user->hasRole('Inactive')){
-                $different=$user->type();
-                $different->delete();
-                $user->type_type=null;
-                $user->type_id=null;
-                return \redirect('/user/profile/choose_type')
-                    ->with('danger','Profile was reset!');
+        $user = Auth::guard('user')->user();
+        if ($user->hasRole('Inactive')) {
+            $different = $user->type();
+
+            $user->type_type = null;
+            $user->type_id = null;
+            $different->delete();
+            return \redirect('/user/profile/choose_type')
+                ->with('danger', 'Profile was reset!');
         }
         return \redirect('/user/profile/edit')
-            ->with('error','You cannot reset your profile!');
+            ->with('error', 'You cannot reset your profile!');
 
     }
 
@@ -119,18 +122,18 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $user=Auth::guard('user')->user();
-        $different=$user->type;
+        $user = Auth::guard('user')->user();
+        $different = $user->type;
         switch ($user->type_type) {
             case 'App\\DifferentPerson':
-                return view('user.profile.edit_person',compact('different'));
+                return view('user.profile.edit_person', compact('different'));
             case 'App\\DifferentBusiness':
-                return view('user.profile.edit_business',compact('different'));
+                return view('user.profile.edit_business', compact('different'));
             case 'App\\DifferentWorld':
-                return view('user.profile.edit_world',compact('different'));
+                return view('user.profile.edit_world', compact('different'));
             default:
                 return Redirect::back()
-                    ->with('danger','An error occured!');
+                    ->with('danger', 'An error occured!');
 
         }
     }
@@ -140,7 +143,7 @@ class ProfileController extends Controller
         $rules = array(
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required',
+            'birth_date' => 'required|date|date_format:d/m/Y',
             'gender' => 'required',
             'country' => 'required',
             'city' => 'required',
@@ -157,7 +160,7 @@ class ProfileController extends Controller
         $different = Auth::guard('user')->user()->type;
         $different->first_name = $request->input('first_name');
         $different->last_name = $request->input('last_name');
-        $different->birth_date = $request->input('birth_date');
+        $different->birth_date =$request->input('birth_date');
         $different->gender = $request->input('gender');
         $different->country = $request->input('country');
         $different->city = $request->input('city');
@@ -166,7 +169,7 @@ class ProfileController extends Controller
 
         $different->save();
 
-        return view('user.profile.edit_person',compact('different'))
+        return view('user.profile.edit_person', compact('different'))
             ->with('success', 'Profile updated');
     }
 
@@ -206,7 +209,7 @@ class ProfileController extends Controller
 //        $different->web = $request->input('web');
 //        $different->how_different = $request->input('how_different');
 //        $different->save();
-        return view('user.profile.edit_business',compact('different'))
+        return view('user.profile.edit_business', compact('different'))
             ->with('success', 'Profile updated');
 
     }
@@ -244,7 +247,7 @@ class ProfileController extends Controller
         $different->web = $request->input('web');
         $different->how_different = $request->input('how_different');
         $different->save();
-        return view('user.profile.edit_world',compact('different'))
+        return view('user.profile.edit_world', compact('different'))
             ->with('success', 'Profile updated');
     }
 
@@ -297,7 +300,7 @@ class ProfileController extends Controller
     {
 
     }
-    
+
     public function store_edit_page(Request $request)
     {
 
@@ -310,7 +313,7 @@ class ProfileController extends Controller
 //        $file = ['image' => Input::file('image')];
 //        return $request->file('profile_picture');
         //$request->file('image');
-        $profile_picture = ['profile_picture'=>$request->file('profile_picture')];
+        $profile_picture = ['profile_picture' => $request->file('profile_picture')];
         //return $profile_picture;
         $rules = ['profile_picture' => 'required|mimes:jpeg,bmp,png,jpg',]; //mimes:jpeg,bmp,png and for max size max:10000
 

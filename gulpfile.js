@@ -55,5 +55,6 @@ elixir(function (mix) {
         'lity.js',
         'bootstrap-datepicker/bootstrap-datepicker.js'
     ]);
+    mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/css/fonts');
 
 });
