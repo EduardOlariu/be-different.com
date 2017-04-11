@@ -14,5 +14,6 @@ class PersonalPage extends Model
 {
     use BelongsToUser;
     protected $fillable=['short_description','description'];
+    protected $table="personal_pages";
 
 }

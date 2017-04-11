@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function personalPage()
+    {
+        return $this->hasOne('App\PersonalPage');
+    }
+
 
 
 

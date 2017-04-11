@@ -6,6 +6,7 @@ use App\DifferentBusiness;
 use App\DifferentPerson;
 use App\DifferentWorld;
 use App\Http\Controllers\Controller;
+use App\PersonalPage;
 use App\Traits\MySQLTraits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
