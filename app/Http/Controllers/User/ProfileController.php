@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Country;
 use App\DifferentBusiness;
 use App\DifferentPerson;
 use App\DifferentWorld;
@@ -75,7 +76,8 @@ class ProfileController extends Controller
         $different->last_name = $last_name;
         $different->save();
         $different->user()->save($user);
-        return view('user.profile.edit_person', compact('different'));
+        $countries= Country::getList('full_name','name');
+        return view('user.profile.edit_person', compact('different','countries'));
     }
 
     public function create_business()
@@ -123,9 +125,11 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('user')->user();
         $different = $user->type;
+        $countries= Country::pluck('name','name')->all();
+
         switch ($user->type_type) {
             case 'App\\DifferentPerson':
-                return view('user.profile.edit_person', compact('different'));
+                return view('user.profile.edit_person', compact('different','countries'));
             case 'App\\DifferentBusiness':
                 return view('user.profile.edit_business', compact('different'));
             case 'App\\DifferentWorld':

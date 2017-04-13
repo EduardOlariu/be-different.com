@@ -181,6 +181,7 @@ return [
          * Added by user eolariu
          */
         Collective\Html\HtmlServiceProvider::class,
+        Webpatser\Countries\CountriesServiceProvider::class,
 
     ],
 
@@ -232,11 +233,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         /**
-         * Added by user
+         * Added by user eolariu
          */
 
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        'Countries' => Webpatser\Countries\CountriesFacade::class,
 
     ],
 

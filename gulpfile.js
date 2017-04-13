@@ -49,7 +49,7 @@ elixir(function (mix) {
         'bootstrap-datepicker/bootstrap-datepicker3.standalone.css',
     ]);
     mix.scripts([
-        'jquery_3.1.1.js',
+        // 'jquery_3.1.1.js',
         'app.js',
         'custom.js',
         'lity.js',

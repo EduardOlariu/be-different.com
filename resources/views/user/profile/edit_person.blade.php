@@ -23,7 +23,6 @@
                     </div>
 
 
-
                     <div class="panel-body">
 
 
@@ -31,9 +30,9 @@
 
 
 
-                        @include('user.profile.partials.image')
+                    @include('user.profile.partials.image')
 
-                        <!-- First_name Form Input -->
+                    <!-- First_name Form Input -->
                         <div class="form-group col-md-12">
                             {!! Form::label('first_name','First name:') !!}
                             {!! Form::text('first_name',old('fist_name'),['class'=> 'form-control']) !!}
@@ -49,8 +48,11 @@
                         <!-- Birth Date Form Input -->
                         <div class="form-group col-md-12">
                             {!! Form::label('birth_date','Birth Date:') !!}
-                            <div class="input-group date" id="birth_date_div" {{--onChange="verifyDate('birth_date')"--}}>
-                                <input type="text" class="form-control" name="birth_date" value="{{$different->birth_date}}" id="birth_date"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                            <div class="input-group date"
+                                 id="birth_date_div" {{--onChange="verifyDate('birth_date')"--}}>
+                                <input type="text" class="form-control" name="birth_date"
+                                       value="{{$different->birth_date}}" id="birth_date"><span
+                                        class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                             </div>
 
                         </div>
@@ -64,7 +66,7 @@
                         <!-- Country Form Input -->
                         <div class="form-group col-md-12">
                             {!! Form::label('country','Country:') !!}
-                            {!! Form::text('country',old('country'),['class'=> 'form-control']) !!}
+                            {!! Form::select('country',$countries,null,['id'=> 'countries','class'=> 'form-control']) !!}
                         </div>
 
                         <!-- City Form Input -->
@@ -114,16 +116,18 @@
             toggleActive: true
         });
 
-//        function verifyDate(id) {
-//            var val=$('#'+id+' input').val();
-//            var date=val.split('/');
-//            if (date[0]<
-//            alert(date[0]);
-//            alert(date[1]);
-//            alert(date[2]);
-//            alert(val);
-//        }
+        //        function verifyDate(id) {
+        //            var val=$('#'+id+' input').val();
+        //            var date=val.split('/');
+        //            if (date[0]<
+        //            alert(date[0]);
+        //            alert(date[1]);
+        //            alert(date[2]);
+        //            alert(val);
+        //        }
 
-
+        $(document).ready(function () {
+            $("#countries").select2();
+        });
     </script>
 @endsection
