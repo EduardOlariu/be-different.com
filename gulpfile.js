@@ -42,7 +42,7 @@ elixir(function (mix) {
         'lity.css',
         // 'font-awesome/font-awesome-4.7.0/css/font-awesome.min.css',
         'font-awesome/font-awesome-4.7.0/css/font-awesome.css',
-
+        'libs/select2.min.css',
         'bootstrap-datepicker/bootstrap-datepicker.css',
         'bootstrap-datepicker/bootstrap-datepicker.standalone.css',
         'bootstrap-datepicker/bootstrap-datepicker3.css',
@@ -53,6 +53,7 @@ elixir(function (mix) {
         'app.js',
         'custom.js',
         'lity.js',
+        'libs/select2.min.js',
         'bootstrap-datepicker/bootstrap-datepicker.js'
     ]);
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/css/fonts');

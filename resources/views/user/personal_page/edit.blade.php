@@ -29,12 +29,13 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-3">
                                 @if($personalPage->profile_picture)
-                                    <a href="{{"/uploads/user/profile_image/$personalPage->profile_picture"}}" data-lity>
-                                    {{HTML::image("/uploads/user/profile_image/$personalPage->profile_picture",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
+                                    <a href="{{"/uploads/user/profile_image/$personalPage->profile_picture"}}"
+                                       data-lity>
+                                        {{HTML::image("/uploads/user/profile_image/$personalPage->profile_picture",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
                                     </a>
-                                    @else
+                                @else
                                     {{HTML::image("/uploads/anonym.jpg",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
-                                    @endif
+                                @endif
                             </div>
                             <!-- profile_picture Form Input-->
                             <div class="form-group col-md-offset">
