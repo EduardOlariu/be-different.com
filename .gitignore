@@ -8,4 +8,4 @@ Homestead.json
 Homestead.yaml
 .env
 /storage/homestead.sqlite
-
+/public/uploads

@@ -20,6 +20,8 @@ class UpdateDifferentPeopleAddForms extends Migration
             $table->string('city')->nullable();
             $table->text('about_you')->nullable();
             $table->text('how_different')->nullable();
+            $table->string('profile_picture')->nullable();
+
 
 
         });
@@ -33,6 +35,10 @@ class UpdateDifferentPeopleAddForms extends Migration
     public function down()
     {
         Schema::table('different_people', function (Blueprint $table) {
+
+
+            $table->dropColumn('profile_picture');
+
             $table->dropColumn('birth_date');
             $table->dropColumn('gender');
             $table->dropColumn('country');

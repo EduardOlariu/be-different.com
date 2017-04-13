@@ -40,6 +40,7 @@
                             <div class="form-group col-md-offset">
 
                                 {!! Form::file('profile_picture',old('profile_picture'),['class'=> 'form-control']) !!}
+
                             </div>
 
                         </div>

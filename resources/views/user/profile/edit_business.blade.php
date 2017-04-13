@@ -23,9 +23,12 @@
                     </div>
 
                     <div class="panel-body">
-                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
-                        
-                        
+
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST','files'=>'true']) !!}
+
+                    @include('user.profile.partials.image')
+
+
                         <!-- Business_Name Form Input -->
                         <div class="form-group">
                             {!! Form::label('name','Business Name:') !!}

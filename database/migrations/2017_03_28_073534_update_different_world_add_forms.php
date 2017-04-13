@@ -24,6 +24,7 @@ class UpdateDifferentWorldAddForms extends Migration
             $table->string('phone')->nullable();
             $table->string('web')->nullable();
             $table->text('how_different')->nullable();
+            $table->string('profile_picture')->nullable();
 
 
         });
@@ -37,6 +38,9 @@ class UpdateDifferentWorldAddForms extends Migration
     public function down()
     {
         Schema::table('different_world', function (Blueprint $table) {
+
+            $table->dropColumn('profile_picture');
+
             $table->dropColumn('name');
             $table->dropColumn('email');
             $table->dropColumn('description');

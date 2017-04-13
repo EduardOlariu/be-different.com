@@ -24,26 +24,30 @@
 
 
 
-
                     <div class="panel-body">
 
-                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
 
-                    <!-- First_name Form Input -->
-                        <div class="form-group">
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST','files'=>true]) !!}
+
+
+
+                        @include('user.profile.partials.image')
+
+                        <!-- First_name Form Input -->
+                        <div class="form-group col-md-12">
                             {!! Form::label('first_name','First name:') !!}
                             {!! Form::text('first_name',old('fist_name'),['class'=> 'form-control']) !!}
                         </div>
 
 
                         <!-- Last_name Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('last_name','Last name:') !!}
                             {!! Form::text('last_name',old('last_name'),['class'=> 'form-control']) !!}
                         </div>
 
                         <!-- Birth Date Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('birth_date','Birth Date:') !!}
                             <div class="input-group date" id="birth_date_div" {{--onChange="verifyDate('birth_date')"--}}>
                                 <input type="text" class="form-control" name="birth_date" value="{{$different->birth_date}}" id="birth_date"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
@@ -52,25 +56,25 @@
                         </div>
 
                         <!-- Gender Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('gender','Gender:') !!}
                             {!! Form::select('gender',array('Male' => 'Male', 'Female' => 'Female'),old('gender'),['class'=> 'form-control']) !!}
                         </div>
 
                         <!-- Country Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('country','Country:') !!}
                             {!! Form::text('country',old('country'),['class'=> 'form-control']) !!}
                         </div>
 
                         <!-- City Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('city','City:') !!}
                             {!! Form::text('city',old('city'),['class'=> 'form-control']) !!}
                         </div>
 
                         <!-- About You Form Input -->
-                        <div class="form-group">
+                        <div class="form- col-md-12">
                             {!! Form::label('about_you','About You:') !!}
                             {!! Form::textarea('about_you',old('about_you'),array(
                             'placeholder'=>'Tell us WHAT MAKES YOU DIFFERENT (Your MOTTO in life, What guides you in your life).'),
@@ -78,7 +82,7 @@
                         </div>
 
                         <!-- What Make You Different Form Input -->
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             {!! Form::label('how_different','Why You:') !!}
                             {!! Form::textarea('how_different',old('how_different'),array(
                             'placeholder'=>'Please let us know why would you like to become a member of BE DIFFERENT.'),
@@ -86,7 +90,7 @@
                         </div>
 
 
-                        <button class="btn btn-success" type="submit">Save</button>
+                        <button class="btn btn-success col-md-12" type="submit">Save</button>
                         @include('layouts.partials.errors')
 
                         {!! Form::close() !!}

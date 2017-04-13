@@ -23,10 +23,16 @@ $dp = Auth::guard('user')->user()->type;
                     </div>
 
                     <div class="panel-body">
-                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
+
+                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST','files'=>true]) !!}
 
 
-                    <!-- Organization_Name Form Input -->
+
+                        @include('user.profile.partials.image')
+
+                        </div>
+                        <!-- Organization_Name Form Input -->
+
                         <div class="form-group">
                             {!! Form::label('name','Organization Name:') !!}
                             {!! Form::text('name',null,['class'=> 'form-control']) !!}
