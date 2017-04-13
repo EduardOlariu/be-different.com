@@ -14,6 +14,7 @@ class UpdateDifferentBusinessAddForms extends Migration
     public function up()
     {
         Schema::table('different_business', function (Blueprint $table) {
+            $table->string('profile_picture')->nullable();
             $table->string('email')->nullable();
             $table->text('description')->nullable();
             $table->string('address')->nullable();
@@ -36,6 +37,7 @@ class UpdateDifferentBusinessAddForms extends Migration
     public function down()
     {
         Schema::table('different_business', function (Blueprint $table) {
+            $table->dropColumn('profile_picture');
             $table->dropColumn('email');
             $table->dropColumn('description');
             $table->dropColumn('address');

@@ -26,7 +26,32 @@ $dp = Auth::guard('user')->user()->type;
                     {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST']) !!}
 
 
-                    <!-- Organization_Name Form Input -->
+
+                            <!-- Profil Picture -->
+                        <div class="">
+                            <div class="col-md-12">
+                                {!! Form::label('profile_picture','Profile Picture:') !!}
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                @if($different->profile_picture)
+                                    <a href="{{"/uploads/user/profile_image/$different->profile_picture"}}" data-lity>
+                                        {{HTML::image("/uploads/user/profile_image/$different->profile_picture",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
+                                    </a>
+                                @else
+                                    {{HTML::image("/uploads/anonym.jpg",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
+                                @endif
+                            </div>
+                            <!-- profile_picture Form Input-->
+                            <div class="form-group col-md-offset">
+
+                                {!! Form::file('profile_picture',old('profile_picture'),['class'=> 'form-control']) !!}
+                            </div>
+
+                            <!-- /Profile Picture -->
+
+                        </div>
+                        <!-- Organization_Name Form Input -->
                         <div class="form-group">
                             {!! Form::label('name','Organization Name:') !!}
                             {!! Form::text('name',null,['class'=> 'form-control']) !!}

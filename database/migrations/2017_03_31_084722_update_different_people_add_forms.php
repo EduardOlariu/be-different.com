@@ -14,6 +14,7 @@ class UpdateDifferentPeopleAddForms extends Migration
     public function up()
     {
         Schema::table('different_people', function (Blueprint $table) {
+            $table->string('profile_picture')->nullable();
             $table->string('birth_date')->nullable();
             $table->string('gender')->nullable();
             $table->string('country')->nullable();
@@ -33,6 +34,7 @@ class UpdateDifferentPeopleAddForms extends Migration
     public function down()
     {
         Schema::table('different_people', function (Blueprint $table) {
+            $table->dropColumn('profile_picture');
             $table->dropColumn('birth_date');
             $table->dropColumn('gender');
             $table->dropColumn('country');

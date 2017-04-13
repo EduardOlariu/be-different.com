@@ -73,6 +73,7 @@ class ProfileController extends Controller
             $last_name = $name[1];
         }
         $different = new DifferentPerson();
+        $different->profile_picture = "Default Profile Picture";
         $different->first_name = $first_name;
         $different->last_name = $last_name;
         $different->save();
@@ -84,6 +85,7 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('user')->user();
         $different = new DifferentBusiness();
+        $different->profile_picture = "Default Profile Picture";
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
@@ -94,11 +96,13 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('user')->user();
         $different = new DifferentWorld();
+        $different->profile_picture = "Default Profile Picture";
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
         return view('user.profile.edit_business', compact('different'));
     }
+
 
 
     public function reset()
@@ -144,7 +148,7 @@ class ProfileController extends Controller
         $rules = array(
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required|date|date_format:d/m/Y',
+            'birth_date' => 'required|date|date_format:Y-m-d',
             'gender' => 'required',
             'country' => 'required',
             'city' => 'required',
@@ -271,7 +275,7 @@ class ProfileController extends Controller
 
     /**
      * --------------------------------------------------------------------------------------------------------
-     *                                          Edt personal page
+     *                                          Edit personal page
      * --------------------------------------------------------------------------------------------------------
      */
 
@@ -351,7 +355,7 @@ class ProfileController extends Controller
             $personalPage->save();
             return Redirect::to('/user/profile/page/edit')
                 ->with('success', 'Profile page updated');
-        } else {
+        }   else {
             // sending back with error message.
             return Redirect::to('/user/profile/test_image')
                 ->with('error', 'uploaded file is not valid');

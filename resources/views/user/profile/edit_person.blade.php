@@ -15,12 +15,37 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Person Profile
+                    <div class="panel-heading">Person Profile
                         @if(Auth::guard('user')->user()->hasRole('Inactive'))
                             <div style="float:right"><a href="/user/profile/reset">Reset Profile</a></div>
                         @endif
                     </div>
+
+                    <!-- Profile Picture -->
+
+                    <div class="">
+                        <div class="col-md-12">
+                            {!! Form::label('profile_picture','Profile Picture:') !!}
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-3">
+                            @if($different->profile_picture)
+                                <a href="{{"/uploads/user/profile_image/$different->profile_picture"}}" data-lity>
+                                    {{HTML::image("/uploads/user/profile_image/$different->profile_picture",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
+                                </a>
+                            @else
+                                {{HTML::image("/uploads/anonym.jpg",'Be different Profile Picture',['class'=>'profile_picture preview'])}}
+                            @endif
+                        </div>
+                        <!-- profile_picture Form Input-->
+                        <div class="form-group col-md-offset">
+
+                            {!! Form::file('profile_picture',old('profile_picture'),['class'=> 'form-control']) !!}
+                        </div>
+
+                    </div>
+
+                    <!-- /Profile Picture -->
 
 
 
