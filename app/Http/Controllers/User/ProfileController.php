@@ -146,7 +146,7 @@ class ProfileController extends Controller
             'profile_picture' => 'mimes:jpeg,bmp,png,jpg',//mimes:jpeg,bmp,png and for max size max:10000
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required|date|date_format:d/m/Y',
+            'birth_date' => 'required|date|date_format:Y-m-d',
             'gender' => 'required',
             'country' => 'required',
             'city' => 'required',
