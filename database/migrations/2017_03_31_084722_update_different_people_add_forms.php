@@ -34,7 +34,7 @@ class UpdateDifferentPeopleAddForms extends Migration
     public function down()
     {
         Schema::table('different_people', function (Blueprint $table) {
-            $table->dropColumn('profile_picture');
+//            $table->dropColumn('profile_picture');
             $table->dropColumn('birth_date');
             $table->dropColumn('gender');
             $table->dropColumn('country');

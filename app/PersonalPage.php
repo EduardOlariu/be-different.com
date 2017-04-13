@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\BelongsToUser;
+
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalPage extends Model
 {
     use BelongsToUser;
+
+
     protected $fillable=['short_description','description'];
     protected $table="personal_pages";
 

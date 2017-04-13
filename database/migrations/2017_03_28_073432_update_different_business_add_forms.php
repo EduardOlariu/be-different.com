@@ -37,7 +37,7 @@ class UpdateDifferentBusinessAddForms extends Migration
     public function down()
     {
         Schema::table('different_business', function (Blueprint $table) {
-            $table->dropColumn('profile_picture');
+//            $table->dropColumn('profile_picture');
             $table->dropColumn('email');
             $table->dropColumn('description');
             $table->dropColumn('address');

@@ -20,7 +20,6 @@ class ProfileController extends Controller
     use MySQLTraits;
 
 
-
     public function __construct()
     {
         $this->middleware('user');
@@ -28,7 +27,6 @@ class ProfileController extends Controller
         $this->middleware('user.profile')->except('choose_type', 'create_person', 'create_business', 'create_world');
 
     }
-
 
 
     public function index()
@@ -73,7 +71,6 @@ class ProfileController extends Controller
             $last_name = $name[1];
         }
         $different = new DifferentPerson();
-        $different->profile_picture = "Default Profile Picture";
         $different->first_name = $first_name;
         $different->last_name = $last_name;
         $different->save();
@@ -85,7 +82,6 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('user')->user();
         $different = new DifferentBusiness();
-        $different->profile_picture = "Default Profile Picture";
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
@@ -96,13 +92,11 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('user')->user();
         $different = new DifferentWorld();
-        $different->profile_picture = "Default Profile Picture";
         $different->name = $user->name;
         $different->save();
         $different->user()->save($user);
         return view('user.profile.edit_business', compact('different'));
     }
-
 
 
     public function reset()
@@ -143,9 +137,13 @@ class ProfileController extends Controller
         }
     }
 
+
+
     public function store_edit_person(Request $request)
     {
-        $rules = array(
+        $user = Auth::guard('user')->user();
+        $rules = [
+            'profile_picture' => 'mimes:jpeg,bmp,png,jpg',//mimes:jpeg,bmp,png and for max size max:10000
             'first_name' => 'required',
             'last_name' => 'required',
             'birth_date' => 'required|date|date_format:Y-m-d',
@@ -154,84 +152,40 @@ class ProfileController extends Controller
             'city' => 'required',
             'about_you' => 'required',
             'how_different' => 'required'
-        );
 
-        $validator = Validator::make($request->input(), $rules);
+        ];
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return Redirect::to('/user/profile/edit')
                 ->withErrors($validator)
-                ->withInput($request->input());
+                ->withInput($request->all());
         }
         $different = Auth::guard('user')->user()->type;
-        $different->first_name = $request->input('first_name');
-        $different->last_name = $request->input('last_name');
-        $different->birth_date =$request->input('birth_date');
-        $different->gender = $request->input('gender');
-        $different->country = $request->input('country');
-        $different->city = $request->input('city');
-        $different->about_you = $request->input('about_you');
-        $different->how_different = $request->input('how_different');
-
-        $different->save();
+        $this->storeDifferentProfilePicture($request, $user);
+        $different->fill($request->input());
 
         return view('user.profile.edit_person', compact('different'))
             ->with('success', 'Profile updated');
-    }
 
-    public function store_edit_business(Request $request)
-    {
-        $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'phone' => 'required',
-            'web' => 'required',
-            'how_different' => 'required'
-        );
-
-        $validator = Validator::make($request->input(), $rules);
-        if ($validator->fails()) {
-            return Redirect::to('/user/profigit sle/edit')
-                ->withErrors($validator)
-                ->withInput($request->input());
-        }
-        $different = Auth::guard('user')->user()->type;
-
-        $different->fill($request->input());
-//        return $different;
-//        $different->name = $request->input('name');
-//        $different->email = $request->input('email');
-//        $different->description = $request->input('description');
-//        $different->address = $request->input('address');
-//        $different->city = $request->input('city');
-//        $different->state = $request->input('state');
-//        $different->zip = $request->input('zip');
-//        $different->phone = $request->input('phone');
-//        $different->web = $request->input('web');
-//        $different->how_different = $request->input('how_different');
-//        $different->save();
-        return view('user.profile.edit_business', compact('different'))
-            ->with('success', 'Profile updated');
 
     }
 
-    public function store_edit_world(Request $request)
+
+    public
+    function store_edit_business(Request $request)
     {
         $rules = array(
-            'name' => 'required',
-            'email' => 'required',
-            'description' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'phone' => 'required',
-            'web' => 'required',
-            'how_different' => 'required'
+            'profile_picture' => 'mimes:jpeg,bmp,png,jpg',//mimes:jpeg,bmp,png and for max size max:10000
+        'name' => 'required',
+        'email' => 'required',
+        'description' => 'required',
+        'address' => 'required',
+        'city' => 'required',
+        'state' => 'required',
+        'zip' => 'required',
+        'phone' => 'required',
+        'web' => 'required',
+        'how_different' => 'required'
         );
 
         $validator = Validator::make($request->input(), $rules);
@@ -240,30 +194,63 @@ class ProfileController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->input());
         }
-        $different = Auth::guard('user')->user()->type;
-        $different->name = $request->input('name');
-        $different->email = $request->input('email');
-        $different->description = $request->input('description');
-        $different->address = $request->input('address');
-        $different->city = $request->input('city');
-        $different->state = $request->input('state');
-        $different->zip = $request->input('zip');
-        $different->phone = $request->input('phone');
-        $different->web = $request->input('web');
-        $different->how_different = $request->input('how_different');
-        $different->save();
+        $user = Auth::guard('user')->user();
+        $this->storeDifferentProfilePicture($request, $user);
+        $different = $user->type;
+
+
+        $different->fill($request->input());
+
+        return view('user.profile.edit_business', compact('different'))
+            ->with('success', 'Profile updated');
+
+
+    }
+
+    public
+    function store_edit_world(Request $request)
+    {
+
+
+        $rules = array(
+            'profile_picture' => 'mimes:jpeg,bmp,png,jpg',//mimes:jpeg,bmp,png and for max size max:10000
+        'name' => 'required',
+        'email' => 'required',
+        'description' => 'required',
+        'address' => 'required',
+        'city' => 'required',
+        'state' => 'required',
+        'zip' => 'required',
+        'phone' => 'required',
+        'web' => 'required',
+        'how_different' => 'required'
+        );
+
+        $validator = Validator::make($request->input(), $rules);
+        if ($validator->fails()) {
+            return Redirect::to('/user/profile/edit')
+                ->withErrors($validator)
+                ->withInput($request->input());
+        }
+
+
+        $user = Auth::guard('user')->user();
+        $this->storeDifferentProfilePicture($request, $user);
+        $different = $user->type;
+        $different->fill($request->input());
+
         return view('user.profile.edit_world', compact('different'))
             ->with('success', 'Profile updated');
+
     }
 
 
     public function store_edit(Request $request)
     {
+//        return $request->file('profile_picture');
         switch (Auth::guard('user')->user()->type_type) {
             case 'App\\DifferentPerson':
                 return $this->store_edit_person($request);
-
-
             case 'App\\DifferentBusiness':
                 return $this->store_edit_business($request);
             case 'App\\DifferentWorld':
@@ -279,7 +266,8 @@ class ProfileController extends Controller
      * --------------------------------------------------------------------------------------------------------
      */
 
-    public function edit_page()
+    public
+    function edit_page()
     {
         $user = Auth::guard('user')->user();
         if (!$user->personalPage) {
@@ -301,12 +289,14 @@ class ProfileController extends Controller
 //
 //    }
 
-    public function upload_profile_picture(Request $request)
+    public
+    function upload_picture(Request $request, $user)
     {
 
     }
 
-    public function store_edit_page(Request $request)
+    public
+    function store_edit_page(Request $request)
     {
 
 //        dd($request);
@@ -314,6 +304,8 @@ class ProfileController extends Controller
 //        return Input::file('profile_picture');
 
         $user = Auth::guard('user')->user();
+//        return $this->upload_image($request, $user);
+//        return "ba a mers!";
         $personalPage = $user->personalPage;
 //        $file = ['image' => Input::file('image')];
 //        return $request->file('profile_picture');
@@ -355,7 +347,7 @@ class ProfileController extends Controller
             $personalPage->save();
             return Redirect::to('/user/profile/page/edit')
                 ->with('success', 'Profile page updated');
-        }   else {
+        } else {
             // sending back with error message.
             return Redirect::to('/user/profile/test_image')
                 ->with('error', 'uploaded file is not valid');
@@ -366,12 +358,14 @@ class ProfileController extends Controller
     }
 
 
-    public function test_image()
+    public
+    function test_image()
     {
         return view('user.profile.person');
     }
 
-    public function upload_image(Request $request)
+    public
+    function upload_image(Request $request)
     {
         return $request->file('image');
         return Input::file('image');
@@ -403,6 +397,41 @@ class ProfileController extends Controller
             }
         }
     }
+
+
+
+
+    /**
+     * ==============================================================================================================
+     * ====================================   useful functions    ===================================================
+     * ==============================================================================================================
+     */
+
+    /**
+     * @param Request $request
+     * @param $user
+     * @return string
+     */
+    public function storeDifferentProfilePicture(Request $request, $user)
+    {
+        if ($request->file('profile_picture') != null) {
+            if ($request->file('profile_picture')->isValid()) {
+                $destinationPath = 'uploads/user/different_profiles'; // upload path
+                $extension = $request->file('profile_picture')->getClientOriginalExtension();
+//            $extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
+                $type = explode('\\', $user->type_type);
+                $fileName = $user->id . $type[1] . '.' . $extension; // renameing image
+                $request->file('profile_picture')->move($destinationPath, $fileName);
+                $user->type->profile_picture = $fileName;
+                $user->type->save();
+            } else {
+                return Redirect::back()->withInput($request->all());
+            }
+        }
+
+
+    }
+
 
 
 }
