@@ -19,7 +19,12 @@ class DifferentBusiness extends Model
 
 
     protected $table="different_business";
-    protected $fillable=['name','email','address','description','city','state','zip','phone','web','how_different'];
 
-    //
+    protected $fillable=['name','email','address','description','city','state','zip','phone','web','how_different','country','industry_id'];
+	
+	public function industry()
+	{
+		return $this->belongsTo('App\Industry');
+    }
+	
 }

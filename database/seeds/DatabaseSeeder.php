@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeded the countries!');
         $this->call('RolesTableSeeder');
         $this->command->info('Seeded the roles!');
-
+	    $this->call('IndustriesSeeder');
+	    $this->command->info('Seeded the industries!');
     }
 }

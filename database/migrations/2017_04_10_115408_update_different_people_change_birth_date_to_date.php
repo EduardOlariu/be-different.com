@@ -15,7 +15,6 @@ class UpdateDifferentPeopleChangeBirthDateToDate extends Migration
     {
         Schema::table('different_people', function (Blueprint $table) {
             $table->date('birth_date')->change();
-
         });
     }
 
@@ -28,6 +27,7 @@ class UpdateDifferentPeopleChangeBirthDateToDate extends Migration
     {
         Schema::table('different_people', function (Blueprint $table) {
             $table->string('birth_date')->change();
+            
         });
     }
 }

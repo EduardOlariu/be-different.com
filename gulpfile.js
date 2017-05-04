@@ -37,12 +37,13 @@
 var elixir = require('laravel-elixir');
 elixir(function (mix) {
     mix.styles([
+        'font-awesome/font-awesome-4.7.0/css/font-awesome.css',
+        'libs/select2.min.css',
         'app.css',
         'styles.css',
         'lity.css',
         // 'font-awesome/font-awesome-4.7.0/css/font-awesome.min.css',
-        'font-awesome/font-awesome-4.7.0/css/font-awesome.css',
-        'libs/select2.min.css',
+
         'bootstrap-datepicker/bootstrap-datepicker.css',
         'bootstrap-datepicker/bootstrap-datepicker.standalone.css',
         'bootstrap-datepicker/bootstrap-datepicker3.css',

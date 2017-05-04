@@ -20,6 +20,15 @@ class DifferentWorld extends Model
 
 
     protected $table = 'different_world';
-    protected $fillable=['name','email','address','description','city','state','zip','phone','web','how_different'];
-
+    protected $fillable=['name','email','address','description','city','state','zip','phone','web','how_different','industry_id','country_id'];
+	
+	
+	
+	public function industry()
+	{
+		return $this->belongsTo('App\Industry');
+	}
+	
+	
+	
 }

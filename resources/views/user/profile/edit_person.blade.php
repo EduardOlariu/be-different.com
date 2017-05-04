@@ -11,101 +11,102 @@
 @extends('user.layout.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Person Profile
-                        @if(Auth::guard('user')->user()->hasRole('Inactive'))
-                            <div style="float:right"><a href="/user/profile/reset">Reset Profile</a></div>
-                        @endif
-                    </div>
+	<div class="container" >
+		<div class="row" >
+			<div class="col-md-12" >
+				<div class="panel panel-default" >
+					<div class="panel-heading" >
+						Person Profile
+						@if(Auth::guard('user')->user()->hasRole('Inactive'))
+							<div style="float:right" ><a href="/user/profile/reset" >Reset Profile</a ></div >
+						@endif
+					</div >
 
 
-                    <div class="panel-body">
+					<div class="panel-body" >
 
 
-                    {!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST','files'=>true]) !!}
+					{!! Form::model($different,['url'=>'/user/profile/edit','method'=>'POST','files'=>true]) !!}
 
 
 
-                    @include('user.profile.partials.image')
+					@include('user.profile.partials.image')
 
-                    <!-- First_name Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('first_name','First name:') !!}
-                            {!! Form::text('first_name',old('fist_name'),['class'=> 'form-control']) !!}
-                        </div>
-
-
-                        <!-- Last_name Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('last_name','Last name:') !!}
-                            {!! Form::text('last_name',old('last_name'),['class'=> 'form-control']) !!}
-                        </div>
-
-                        <!-- Birth Date Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('birth_date','Birth Date:') !!}
-                            <div class="input-group date"
-                                 id="birth_date_div" {{--onChange="verifyDate('birth_date')"--}}>
-                                <input type="text" class="form-control" name="birth_date"
-                                       value="{{$different->birth_date}}" id="birth_date"><span
-                                        class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                            </div>
-
-                        </div>
-
-                        <!-- Gender Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('gender','Gender:') !!}
-                            {!! Form::select('gender',array('Male' => 'Male', 'Female' => 'Female'),old('gender'),['class'=> 'form-control']) !!}
-                        </div>
-
-                        <!-- Country Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('country','Country:') !!}
-                            {!! Form::select('country',$countries,null,['id'=> 'countries','class'=> 'form-control']) !!}
-                        </div>
-
-                        <!-- City Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('city','City:') !!}
-                            {!! Form::text('city',old('city'),['class'=> 'form-control']) !!}
-                        </div>
-
-                        <!-- About You Form Input -->
-                        <div class="form- col-md-12">
-                            {!! Form::label('about_you','About You:') !!}
-                            {!! Form::textarea('about_you',old('about_you'),array(
-                            'placeholder'=>'Tell us WHAT MAKES YOU DIFFERENT (Your MOTTO in life, What guides you in your life).'),
-                            ['class'=> 'form-control']) !!}
-                        </div>
-
-                        <!-- What Make You Different Form Input -->
-                        <div class="form-group col-md-12">
-                            {!! Form::label('how_different','Why You:') !!}
-                            {!! Form::textarea('how_different',old('how_different'),array(
-                            'placeholder'=>'Please let us know why would you like to become a member of BE DIFFERENT.'),
-                            ['class'=> 'form-control']) !!}
-                        </div>
+					<!-- First_name Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('first_name','First name:') !!}
+							{!! Form::text('first_name',old('fist_name'),['class'=> 'form-control']) !!}
+						</div >
 
 
-                        <button class="btn btn-success col-md-12" type="submit">Save</button>
-                        @include('layouts.partials.errors')
+						<!-- Last_name Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('last_name','Last name:') !!}
+							{!! Form::text('last_name',old('last_name'),['class'=> 'form-control']) !!}
+						</div >
 
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<!-- Birth Date Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('birth_date','Birth Date:') !!}
+							<div class="input-group date"
+							     id="birth_date_div" {{--onChange="verifyDate('birth_date')"--}}>
+								<input type="text" class="form-control" name="birth_date"
+								       value="@if($different->birth_date!=null) {{$different->birth_date}} @else {{old('birth_date')}}@endif" id="birth_date" ><span
+										class="input-group-addon" ><i class="glyphicon glyphicon-th" ></i ></span >
+							</div >
+
+						</div >
+
+						<!-- Gender Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('gender','Gender:') !!}
+							{!! Form::select('gender',array_merge([''=>'Please select'],array('Female' => 'Female','Male' => 'Male')),$different->gender,['id'=>'gender','class'=> 'form-control']) !!}
+						</div >
+
+						<!-- Country Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('country','Country:') !!}
+							{!! Form::select('country',array_merge([''=>'Please select'],$countries),null,['id'=> 'countries','class'=> 'form-control']) !!}
+						</div >
+
+						<!-- City Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('city','City:') !!}
+							{!! Form::text('city',old('city'),['class'=> 'form-control']) !!}
+						</div >
+
+						<!-- About You Form Input -->
+						<div class="form- col-md-12" >
+							{!! Form::label('about_you','About You:') !!}
+							{!! Form::textarea('about_you',old('about_you'),array(
+							'placeholder'=>'Tell us WHAT MAKES YOU DIFFERENT (Your MOTTO in life, What guides you in your life).'),
+							['class'=> 'form-control']) !!}
+						</div >
+
+						<!-- What Make You Different Form Input -->
+						<div class="form-group col-md-12" >
+							{!! Form::label('how_different','Why You:') !!}
+							{!! Form::textarea('how_different',old('how_different'),array(
+							'placeholder'=>'Please let us know why would you like to become a member of BE DIFFERENT.'),
+							['class'=> 'form-control']) !!}
+						</div >
+
+
+						<button class="btn btn-success col-md-12" type="submit" >Save</button >
+						@include('layouts.partials.errors')
+
+						{!! Form::close() !!}
+					</div >
+				</div >
+			</div >
+		</div >
+	</div >
 
 
 @endsection
 @section('scripts')
-    <script type="application/javascript">
+	<script type="application/javascript" >
+        //        $('select#countries option:first').attr('disabled', true);
         $('#birth_date_div').datepicker({
             format: "yyyy-mm-dd",
             maxViewMode: 3,
@@ -126,8 +127,15 @@
         //            alert(val);
         //        }
 
-        $(document).ready(function () {
-            $("#countries").select2();
+        //        $(document).ready(function () {
+        $("#countries").select2({
+            placeholder: "Select a state",
+            allowClear: true
         });
-    </script>
+        $("#gender").select2({
+            placeholder: "Select a gender",
+            allowClear: true
+        });
+        //        });
+	</script >
 @endsection
