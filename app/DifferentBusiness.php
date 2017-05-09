@@ -6,6 +6,7 @@ namespace App;
 
 
 
+use App\Traits\HasTagsTraits;
 use App\Traits\HasUserTraits;
 use Illuminate\Database\Eloquent\Model;
 

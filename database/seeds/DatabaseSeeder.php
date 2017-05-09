@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeded the roles!');
 	    $this->call('IndustriesSeeder');
 	    $this->command->info('Seeded the industries!');
+	    $this->call('TypeSeeder');
+	    $this->command->info('Seeded the types!');
     }
 }
