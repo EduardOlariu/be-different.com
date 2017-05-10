@@ -237,7 +237,7 @@ class ProfileController extends Controller
 	{
 		
 		$countries = Country::pluck('name', 'id')->all();
-		$industries = Country::pluck('name', 'id')->all();
+		$industries = Industry::pluck('name', 'id')->all();
 		
 		$rules = array(
 			'profile_picture' => 'mimes:jpeg,bmp,png,jpg',//mimes:jpeg,bmp,png and for max size max:10000

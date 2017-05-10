@@ -12,11 +12,12 @@
 	<div class="container" >
 		<div class="col-md-12" >
 			<div class="panel panel-default" >
-				<div class="panel-heading" >Personal Page</div >
+				<div class="panel-heading" >Events Page</div >
 
 				<div class="panel-body" >
 					@foreach($events as $event)
-						<li >{{$event}}</li >
+						@include('events.partials.event')
+						{{--<a href="/user/events/{{$event->id}}" ><li >{{$event->name}}</li ></a >--}}
 					@endforeach
 				</div >
 			</div >

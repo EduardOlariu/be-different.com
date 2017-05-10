@@ -39,12 +39,23 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'User\PageController@index');
     Route::get('/home', 'User\PageController@index');
     Route::get('/dashboard', 'User\PageController@index');
+	
+	
+	/**
+	 * Events group
+	 */
 	Route::group(['prefix' => 'events'], function () {
 		
 		Route::get('/', 'EventsController@index');
+		Route::post('/', 'EventsController@store');
+		Route::get('/create', 'EventsController@create');
 		Route::get('/{event}', 'EventsController@show');
 	});
-
+	
+	
+	/**
+	 * Profile group
+	 */
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', 'User\ProfileController@index');
 

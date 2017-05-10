@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+//remaining user -> verify if can make event
+
+
 use App\Event;
+use App\Type;
 use function compact;
 use Illuminate\Http\Request;
+use function redirect;
 use function view;
 
 class EventsController extends Controller
@@ -23,8 +28,8 @@ class EventsController extends Controller
      */
     public function index()
     {
-	    $events=Event::pluck('name');
-	    return view('view.show',compact('events'));
+	    $events=Event::latest()->get();
+	    return view('events.index',compact('events'));
     }
 
     /**
@@ -34,7 +39,9 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+    	$types=Type::all();
+    	//return $types;
+        return view('events.create',compact('types'));
     }
 
     /**
@@ -45,7 +52,16 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+	
+	    $rules = array([
+	    	'name'=>'required',
+		    'body'=>'required|min:25',
+		    'type'=>'required'
+	    ]);
+	    $this->validate($request,$rules);
+	    
+	    Event::create($request->all());
+	    return redirect('/user/events/')->with('success', 'Event created');
     }
 
     /**
