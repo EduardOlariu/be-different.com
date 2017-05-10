@@ -2,11 +2,15 @@
 
 namespace App;
 
+use App\Traits\BelongsToUser;
+use App\Traits\HasCommentsTraits;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $fillable=['name','body','type'];
+	use HasCommentsTraits;
+	use BelongsToUser;
+    protected $fillable=['name','body','type','user_id'];
 	
 	public function type()
 	{
@@ -18,10 +22,4 @@ class Event extends Model
 		return $query->where('type',$val)->get();
     }
 	
-	public function comments()
-	{
-		// return $this->hasOne('App\User','userable_id','id')
-		//   ->where('userable->type','App\DifferentPerson');
-		return $this->morphMany('\App\Comment','commentable');
-	}
 }

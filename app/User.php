@@ -51,7 +51,29 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\PersonalPage');
     }
-
+	
+	
+	public function events()
+	{
+		return $this->hasMany(Event::class);
+    }
+	
+	public function publish_event(Event $event)
+	{
+		$this->events()->save($event);
+	}
+	
+	public function comments()
+	{
+		return $this->hasMany(Comment::class);
+	}
+	
+	public function publish_comment(Comment $comment)
+	{
+		$this->comments()->save($comment);
+	}
+	
+	
 
 
 
