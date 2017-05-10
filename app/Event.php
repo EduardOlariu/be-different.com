@@ -17,4 +17,11 @@ class Event extends Model
 	{
 		return $query->where('type',$val)->get();
     }
+	
+	public function comments()
+	{
+		// return $this->hasOne('App\User','userable_id','id')
+		//   ->where('userable->type','App\DifferentPerson');
+		return $this->morphMany('\App\Comment','commentable');
+	}
 }
