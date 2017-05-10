@@ -10,6 +10,7 @@ use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function compact;
+use Illuminate\Support\Facades\Redirect;
 use function redirect;
 use function view;
 
@@ -93,7 +94,12 @@ class EventsController extends Controller
 	 */
 	public function edit(Event $event)
 	{
-		//
+		if (Auth::guard('user')->user()->id==$event->user->id) {
+			
+			$types = Type::all();
+			return view('events.edit', compact('event', 'types'));
+		}
+		return Redirect::to('/user/events');
 	}
 	
 	/**
@@ -105,7 +111,18 @@ class EventsController extends Controller
 	 */
 	public function update(Request $request, Event $event)
 	{
-		//
+		
+		$rules = [
+			'name' => 'required',
+			'body' => 'required|min:25',
+			'type' => 'required|integer'
+		];
+		$this->validate(request(), $rules);
+		if (Auth::guard('user')->user()->id==$event->user->id) {
+			$event->update($request->all());
+			return back();
+		}
+		return Redirect::to('/user/events');
 	}
 	
 	/**
@@ -116,6 +133,6 @@ class EventsController extends Controller
 	 */
 	public function destroy(Event $event)
 	{
-		//
+		$event->delete();
 	}
 }

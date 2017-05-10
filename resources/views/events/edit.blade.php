@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: eduardolariu
- * Date: 09/05/2017
- * Time: 12:04
- */ ?>
-
+ * Date: 10/05/2017
+ * Time: 15:09
+ */?>
 @extends('user.layout.app')
 
 @section('content')
@@ -18,8 +17,8 @@
 					<div class="col-md-12" >
 						@include('layouts.partials.errors')
 
-						{!! Form::open(['url'=>'/user/events/','method'=>'POST']) !!}
-							@include('events.partials.form')
+						{!! Form::model($event,['url'=>"/user/events/$event->id",'method'=>'PATCH']) !!}
+						@include('events.partials.form')
 						{!! Form::close() !!}
 
 					</div >
@@ -33,6 +32,9 @@
 
 @section('scripts')
 	<script >
+
+        $("#types").val({{$event->type}});
+
         $("#types").select2({
             placeholder: "Select the event's type",
             allowClear: true,
@@ -40,6 +42,7 @@
         });
 	</script >
 @endsection
+
 
 
 

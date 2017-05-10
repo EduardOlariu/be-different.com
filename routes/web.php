@@ -50,6 +50,9 @@ Route::group(['prefix' => 'user'], function () {
 		Route::post('/', 'EventsController@store');
 		Route::get('/create', 'EventsController@create');
 		Route::get('/{event}', 'EventsController@show');
+		Route::patch('/{event}', 'EventsController@update');
+//		Route::get('/{event}/delete', 'EventsController@destroy');
+		Route::get('/{event}/edit', 'EventsController@edit');
 		
 		Route::post('/{event}/comments','CommentsController@store');
 	});
