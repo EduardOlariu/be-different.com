@@ -27,9 +27,12 @@ Route::bind('motivationalVideo',function($value,$route){
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-
+Route::get('/new', function () {
+    return view('index_new');
+});
+Route::post('/mail',['as'=>'mail','uses'=>'MailChimpController@subscribe']);
 
 
 
