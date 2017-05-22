@@ -13,12 +13,7 @@ Notification area
  */
 *.icon-blue {color: #0088cc}
 *.icon-grey {color: black}
-i {
-    width:100px;
-    text-align:center;
-    vertical-align:middle;
-    position: relative;
-}
+
 .fa-badge{
     content:"100";
     position: absolute;
@@ -42,3 +37,13 @@ img.preview{
     height: 140px;
     border:1px #A5A7A9;
 }
+li.chat>i {
+    width:80px;
+    text-align:center;
+    vertical-align:middle;
+    position: relative;
+}
+.navbar-nav>li>a.no-indent{
+    padding: 0px;
+}
+

@@ -42,7 +42,7 @@
                     <li><a href="{{ url('/user/login') }}">Login</a></li>
                     <li><a href="{{ url('/user/register') }}">Register</a></li>
                 @else
-                    <li>
+                    <li class="chat">
                         @if (empty($notification))
                             <i class="fa fa-envelope-open-o fa-2x icon-grey messages"></i>
                         @else
@@ -50,6 +50,12 @@
 
                             <div class="fa-badge">100</div>
                         @endif
+                    </li>
+                    <li>
+                        <a href="{{ url('/user/help') }}" class="no-indent">
+                            <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+
+                        </a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -11,8 +11,8 @@
     <title>{{ config('app.name', 'Be different') }}</title>
 
     <!-- Styles -->
+    <link href="/css/all.css" rel="stylesheet">
 
-@include('layouts.partials.includes')
 <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

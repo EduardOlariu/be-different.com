@@ -42,6 +42,7 @@ elixir(function (mix) {
         'app.css',
         'styles.css',
         'lity.css',
+        'responsive.css',
         // 'font-awesome/font-awesome-4.7.0/css/font-awesome.min.css',
 
         'bootstrap-datepicker/bootstrap-datepicker.css',

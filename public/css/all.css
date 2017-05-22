@@ -2363,12 +2363,7 @@ Notification area
  */
 *.icon-blue {color: #0088cc}
 *.icon-grey {color: black}
-i {
-    width:100px;
-    text-align:center;
-    vertical-align:middle;
-    position: relative;
-}
+
 .fa-badge{
     content:"100";
     position: absolute;
@@ -2392,6 +2387,17 @@ img.preview{
     height: 140px;
     border:1px #A5A7A9;
 }
+li.chat>i {
+    width:80px;
+    text-align:center;
+    vertical-align:middle;
+    position: relative;
+}
+.navbar-nav>li>a.no-indent{
+    padding: 0px;
+}
+
+
 /*! Lity - v2.2.2 - 2016-12-14
 * http://sorgalla.com/lity/
 * Copyright (c) 2015-2016 Jan Sorgalla; Licensed MIT */
@@ -2593,6 +2599,12 @@ img.preview{
   display: none;
 }
 
+@media all and (min-width: 768px) {
+    .navbar-nav>li>a.no-indent {
+         padding-top: 8px;
+         padding-bottom: 0px;
+    }
+}
 /*!
  * Datepicker for Bootstrap v1.6.4 (https://github.com/eternicode/bootstrap-datepicker)
  *

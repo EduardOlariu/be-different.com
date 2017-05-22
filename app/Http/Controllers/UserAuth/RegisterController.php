@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\UserAuth;
 
+use App\Mail\Welcome;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user/home';
+    protected $redirectTo = '/user/welcome';//welcome not home
 
     /**
      * Create a new controller instance.
@@ -53,6 +55,8 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+        
+        
     }
 
     /**
@@ -69,6 +73,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         $user->roles()->attach(0);
+        Mail::to($user)->send(new Welcome($user));
         return $user;
 
     }

@@ -16,11 +16,16 @@ class PageController extends Controller
     public function __construct()
     {
       $this->middleware('user');
-      $this->middleware('user.profile');
+      $this->middleware('user.profile')->except('welcome','index');
     }
 
     public function index()
     {
         return view('user.home')->with('success','');
+    }
+    
+    public function welcome()
+    {
+        return view('user.welcome');
     }
 }
