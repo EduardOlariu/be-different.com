@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 
 use App\Event;
+use App\Http\Requests\EventRequest;
 use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,31 +46,16 @@ class EventsController extends Controller
 		//return $types;
 		return view('events.create', compact('types'));
 	}
-	
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param EventRequest|Request $request
+     * @return \Illuminate\Http\Response
+     */
+	public function store(EventRequest $request)
 	{
 		
-		$rules = [
-			'name' => 'required',
-			'body' => 'required|min:25',
-			'type' => 'required|integer'
-		];
-		$this->validate(request(),$rules);
-//		$validator = Validator::make($request->all(), $rules);
-//		if ($validator->fails()) {
-//			return back()->withErrors($validator)->withInput($request->input());
-//		}
-//	    $this->validate($request->all(),$rules);
-
-//	    $event=Event::create(array_merge($request->all(),['user_id'=>Auth::guard('user')->user()->id]));
-//	    $event->user_id=Auth::guard('user')->user()->id;
-//	    $event->save();
 		Auth::guard('user')->user()->publish_event(new Event($request->all()));
 		
 		return redirect('/user/events/')->with('success', 'Event created');
@@ -109,15 +95,8 @@ class EventsController extends Controller
 	 * @param  \App\Event $event
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Event $event)
+	public function update(EventRequest $request, Event $event)
 	{
-		
-		$rules = [
-			'name' => 'required',
-			'body' => 'required|min:25',
-			'type' => 'required|integer'
-		];
-		$this->validate(request(), $rules);
 		if (Auth::guard('user')->user()->id==$event->user->id) {
 			$event->update($request->all());
 			return back();

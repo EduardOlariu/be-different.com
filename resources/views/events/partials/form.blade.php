@@ -8,7 +8,7 @@
 <!-- Name Form Input -->
 <div class="form-group col-md-12" >
 	{!! Form::label('name','Name:') !!}
-	{!! Form::text('name',old('name'),['class'=> 'form-control','required'=>'required']) !!}
+	{!! Form::text('name',old('name'),['class'=> 'form-control']) !!}
 </div >
 
 
