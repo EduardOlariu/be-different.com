@@ -43,6 +43,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/welcome', 'User\PageController@welcome');
     Route::get('/help', 'User\PageController@welcome');
     Route::get('/dashboard', 'User\PageController@index');
+    Route::get('/wall', 'User\PageController@wall');
 	
 	
 	/**

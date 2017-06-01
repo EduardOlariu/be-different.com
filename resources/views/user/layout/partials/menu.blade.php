@@ -30,7 +30,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/user/dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url('/user/dashboard') }}">Wall</a></li>
+                <li><a href="{{ url('/user/wall') }}">Wall</a></li>
                 <li><a href="{{ url('/user/events') }}">Events</a></li>
                 <li><a href="{{ url('/user/dashboard') }}">Motivational videos</a></li>
             </ul>

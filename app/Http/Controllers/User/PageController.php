@@ -28,4 +28,12 @@ class PageController extends Controller
     {
         return view('user.welcome');
     }
+    
+    public function wall()
+    {
+        $first=DB::table('events');
+        $users=DB::table('users')->union($first)->get();
+        
+        return view('user.wall');
+    }
 }
