@@ -40,12 +40,7 @@ class EventsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create()
-	{
-		$types = Type::all();
-		//return $types;
-		return view('events.create', compact('types'));
-	}
+	
     
     /**
      * Store a newly created resource in storage.

@@ -59,7 +59,7 @@ h1 {
 p {
     padding: 10px;
     font-weight: 100;
-    color: #FFF;
+    /*color: #FFF;*/
 }
 
 
@@ -392,7 +392,7 @@ p {
 }
 .primary-section {
     /*background:#191919;*/
-    background: #000;
+    /*background: #000;*/
     
 }
 .primary-section .triangle {
@@ -402,10 +402,10 @@ p {
     border-bottom: 1px solid #FFF;
 }
 .primary-section, .primary-section .title p, .primary-section h3 {
-    color: #fff;
+    color: #000;
 }
 .primary-section h1 {
-    color:#FFF;
+    /*color:#FFF;*/
 }
 .secondary-section {
     background:#fff;
